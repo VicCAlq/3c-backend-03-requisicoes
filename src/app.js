@@ -38,10 +38,10 @@ app.get('/res', (req, res) => {
   console.log(req)
 
   // Verificação de erro, para caso a requisição seja inválida
-  if (!req.body) {
-    res.status(400).json({ error: erro.message });
-    return
-  }
+  // if (!req.body) {
+  //   res.status(400).json({ error: erro.message });
+  //   return
+  // }
 
   // Os nomes das variáveis correspondem a propriedade "name" dos inputs
   const { nome, email, cor } = req.query
