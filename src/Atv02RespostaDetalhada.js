@@ -43,26 +43,21 @@ import { fileURLToPath } from "url";
 
 const app = express();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(__filename);
 
-// Rota inicial
-app.get("/", (req, res) => {
+
+app.get( (req, res) => {
   res.sendFile(path.join(__dirname, "indexAtv.html"));
 });
 
-// Rota de cadastro
+
 app.get("/cadastro", (req, res) => {
   const { nome, email, controle } = req.query;
-
-  // Se os checkboxes tiverem o nome "personagem"
   let personagem = req.query.personagem || [];
-
-  // Garante que personagem seja um array
   if (!Array.isArray(personagem)) {
     personagem = [personagem];
   }
-
   res.send(`
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -81,11 +76,11 @@ app.get("/cadastro", (req, res) => {
   <p><strong>Tipo de controle:</strong> ${controle}</p>
 
   <p><strong>Personagens escolhidos:</strong></p>
-  <p>${personagem[0] || ""}</p>
-  <p>${personagem[1] || ""}</p>
-  <p>${personagem[2] || ""}</p>
-  <p>${personagem[3] || ""}</p>
-  <p>${personagem[4] || ""}</p>
+  <p>${personagem[0]}</p>
+  <p>${personagem[1]}</p>
+  <p>${personagem[2]}</p>
+  <p>${personagem[3]}</p>
+  <p>${personagem[4]}</p>
 </body>
 </html>
   `);
