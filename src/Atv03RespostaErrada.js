@@ -21,6 +21,9 @@
 
 const express = require('express')
 const app = express()
+app.use(express.urlencoded({ extended: true }))
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'src')));
 
 app.get('/', (req,res)=>
 {
@@ -33,10 +36,17 @@ app.get('/cadastro', (req,res)=>
  console.log(req)
   const {nome, email, controle, personagem} = req.query
 
-if (personagens > 5)
+if (personagem > 5)
 {
-  
+   res.status().json({ error:"Quantidade de personagens escolhida superior ao necessário (5)" });
+    return
 }
+
+else if (personagem < 5)
+  {
+    res.status().json({ error:"Quantidade de personagens escolhida inferior ao necessário (5)" });
+    return
+  }
   res.send(`<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
