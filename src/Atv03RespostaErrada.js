@@ -19,14 +19,3 @@
   * exportar o objeto do servidor para os testes automatizados.
   */
 
-if (personagens.length > 5) {
-  res.send(
-    "Quantidade de personagens escolhida superior ao necessário (5)"
-  );
-}
-
-if (personagens.length < 5) {
-  res.send(
-    "Quantidade de personagens escolhida inferior ao necessário (5)"
-  );
-}
