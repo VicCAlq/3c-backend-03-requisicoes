@@ -31,3 +31,5 @@ if (personagens.length < 5) {
     "Quantidade de personagens escolhida inferior ao necessário (5)"
   );
 }
+
+export default app;
