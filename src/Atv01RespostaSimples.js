@@ -10,6 +10,22 @@
   * é enviado. Quando esta rota for acessada, ela deve
   * retornar a resposta abaixo:
   *
+  
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const app = express();
+
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
+
+app.get( (req, res) => {
+  res.sendFile(path.join(_dirname, "indexAtv.html"));
+});
+
+app.get("/cadastro", (req, res) => {
+  res.send(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -23,7 +39,7 @@
   <h1>Cadastro feito com sucesso!</h1>
 </body>
 </html>
-  *
-  * Ao final deste arquivo, use "export default app" para
-  * exportar o objeto do servidor para os testes automatizados.
-  */
+  `);
+});
+
+export default app;
