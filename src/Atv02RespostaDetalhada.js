@@ -9,6 +9,29 @@
   * foram preenchidas pelo usuário, incluindo-as no
   * conteúdo HTML enviado abaixo:
   *
+
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const app = express();
+
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(__filename);
+
+
+app.get( (req, res) => {
+  res.sendFile(path.join(__dirname, "indexAtv.html"));
+});
+
+
+app.get("/cadastro", (req, res) => {
+  const { nome, email, controle } = req.query;
+  let personagem = req.query.personagem || [];
+  if (!Array.isArray(personagem)) {
+    personagem = [personagem];
+  }
+  res.send(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -20,9 +43,11 @@
 </head>
 <body>
   <h1>Cadastro feito com sucesso!</h1>
+
   <p><strong>Participante:</strong> ${nome}</p>
   <p><strong>Email:</strong> ${email}</p>
   <p><strong>Tipo de controle:</strong> ${controle}</p>
+
   <p><strong>Personagens escolhidos:</strong></p>
   <p>${personagem[0]}</p>
   <p>${personagem[1]}</p>
@@ -31,7 +56,7 @@
   <p>${personagem[4]}</p>
 </body>
 </html>
-  *
-  * Ao final deste arquivo, use "export default app" para
-  * exportar o objeto do servidor para os testes automatizados.
-  */
+  `);
+});
+
+export default app;
