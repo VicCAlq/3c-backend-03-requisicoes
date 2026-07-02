@@ -43,7 +43,7 @@ app.post("/cadastro", (req, res) => {
       );
   }
 
-  res.send("Cadastro realizado com sucesso");
+  res.send("Cadastro realizado com sucesso meu fi");
 });
 
 export default app;
