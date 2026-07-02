@@ -23,3 +23,27 @@
   * Ao final deste arquivo, use "export default app" para
   * exportar o objeto do servidor para os testes automatizados.
   */
+
+app.post("/cadastro", (req, res) => {
+  const personagens = req.body.personagens;
+
+  if (personagens.length > 5) {
+    return res
+      .status(422)
+      .send(
+        "Quantidade de personagens escolhida superior ao necessário (5)"
+      );
+  }
+
+  if (personagens.length < 5) {
+    return res
+      .status(422)
+      .send(
+        "Quantidade de personagens escolhida inferior ao necessário (5)"
+      );
+  }
+
+  res.send("Cadastro realizado com sucesso");
+});
+
+export default app;
