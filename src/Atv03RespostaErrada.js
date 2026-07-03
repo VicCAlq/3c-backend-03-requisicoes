@@ -42,6 +42,19 @@ app.get('/cadastro', (req, res) => {
     personagem = personagem ? [personagem] : [];
   }
 
+
+   if (personagem.length > 5) {
+    return res.send(
+      "Quantidade de personagens escolhida superior ao necessário (5)"
+    );
+  }
+
+  if (personagem.length < 5) {
+    return res.send(
+      "Quantidade de personagens escolhida inferior ao necessário (5)"
+    );
+  }
+
   res.send(`
 <!DOCTYPE html>
 <html lang="pt-BR">
