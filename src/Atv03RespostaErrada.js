@@ -38,9 +38,13 @@ app.get('/cadastro', (req, res) => {
   let { personagem } = req.query;
 
   // garante que personagem seja sempre um array
-  if (!Array.isArray(personagem)) {
-    personagem = personagem ? [personagem] : [];
+if (!Array.isArray(personagem)) {
+  if (personagem) {
+    personagem = [personagem];
+  } else {
+    personagem = [];
   }
+}
 
 
    if (personagem.length > 5) {
@@ -71,12 +75,11 @@ app.get('/cadastro', (req, res) => {
   <p><strong>Email:</strong> ${email}</p>
   <p><strong>Tipo de controle:</strong> ${controle}</p>
   <p><strong>Personagens escolhidos:</strong></p>
-
-  <p>${personagem[0] || ''}</p>
-  <p>${personagem[1] || ''}</p>
-  <p>${personagem[2] || ''}</p>
-  <p>${personagem[3] || ''}</p>
-  <p>${personagem[4] || ''}</p>
+  <p>${personagem[0]}</p>
+  <p>${personagem[1]}</p>
+  <p>${personagem[2]}</p>
+  <p>${personagem[3]}</p>
+  <p>${personagem[4]}</p>
 </body>
 </html>
   `);
