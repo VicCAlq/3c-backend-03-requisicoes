@@ -23,3 +23,73 @@
   * Ao final deste arquivo, use "export default app" para
   * exportar o objeto do servidor para os testes automatizados.
   */
+
+const express = require('express')
+const path = require('path')
+const cors = require('cors');
+
+// Selecionando a porta
+const porta = 3000
+
+const app = express()
+// Necessário para leitura do corpo de uma resposta Post
+app.use(express.urlencoded({ extended: true }))
+// Necessário para interpretação do formato JSON
+app.use(express.json())
+// Para evitar erros de CORS
+app.use(cors());
+// Para configurar o servidor para olhar dentro da pasta src por padrão
+app.use(express.static(path.join(__dirname, 'src')));
+
+app.get('/', (req,res) => {
+  res.sendFile(path.join(__dirname, "indexAtv.html"))
+})
+
+app.get('/cadastro', (req,res) => {
+
+  const nome = req.query.nome
+  const email = req.query.email
+  const controle = req.query.controle
+  let personagem = req.query.personagem
+
+    if (!Array.isArray(personagem)) {
+    personagem = personagem ? [personagem] : []
+  }
+
+  if(personagem.length > 5){
+    res.status(422).send("Quantidade de personagens escolhida superior ao necessário (5)")
+  }
+  else if(personagem.length < 5){
+    res.status(422).send("Quantidade de personagens escolhida inferior ao necessário (5)")
+  }else{
+
+  res.send(`<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+  <title>Prazer em lhe conhecer</title>
+</head>
+<body>
+  <h1>Cadastro feito com sucesso!</h1>
+  <p><strong>Participante:</strong> ${nome}</p>
+  <p><strong>Email:</strong> ${email}</p>
+  <p><strong>Tipo de controle:</strong> ${controle}</p>
+  <p><strong>Personagens escolhidos:</strong></p>
+  <p>${personagem[0]}</p>
+  <p>${personagem[1]}</p>
+  <p>${personagem[2]}</p>
+  <p>${personagem[3]}</p>
+  <p>${personagem[4]}</p>
+</body>
+</html>`)}
+})
+
+app.listen(porta, () => {
+  console.log(`Servidor rodando em http://localhost:${porta}`)
+})
+
+module.exports = { app }
