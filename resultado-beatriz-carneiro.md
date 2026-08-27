@@ -1,5 +1,18 @@
-Data de atualização: Dia 27/8/2026 às 11:36 
+Data de atualização: Dia 27/8/2026 às 11:39 
 
 | Questão | Teste | Entregue | Correto | Mensagem de Erro |
 |---------|-------|----------|---------|------------------|
-| ❌❌❌ | ❌❌❌ | ❌❌❌ | ❌❌❌ | Autor do commit (envio) não corresponde ao dono da Branch |
+| Atividade 01 - Resposta simples | GET / envia o formulário indexAtv.html | ✅ | ✅ | Sem erros |
+| Atividade 01 - Resposta simples | GET /cadastro retorna a mensagem de sucesso | ✅ | ✅ | Sem erros |
+| Atividade 01 - Resposta simples | GET /cadastro não exige informações do usuário | ✅ | ✅ | Sem erros |
+| Atividade 02 - Resposta detalhada | GET / envia o formulário indexAtv.html | ✅ | ✅ | Sem erros |
+| Atividade 02 - Resposta detalhada | GET /cadastro reflete as informações preenchidas | ✅ | ✅ | Sem erros |
+| Atividade 02 - Resposta detalhada | GET /cadastro lista cada um dos cinco personagens escolhidos | ✅ | ✅ | Sem erros |
+| Atividade 03 - Resposta errada | GET /cadastro com exatamente 5 personagens retorna sucesso | ✅ | ✅ | Sem erros |
+| Atividade 03 - Resposta errada | GET /cadastro com menos de 5 personagens informa erro | ✅ | ❌ | AssertionError: expected '<!DOCTYPE html>\n<html lang="pt-BR">\…' to contain 'Quantidade de personagens escolhida i…' |
+| Atividade 03 - Resposta errada | GET /cadastro sem personagens informa erro | ✅ | ❌ | AssertionError: expected '<!DOCTYPE html>\n<html lang="en">\n<h…' to contain 'Quantidade de personagens escolhida i…' |
+| Atividade 03 - Resposta errada | GET /cadastro com mais de 5 personagens informa erro | ✅ | ❌ | AssertionError: expected '<!DOCTYPE html>\n<html lang="pt-BR">\…' to contain 'Quantidade de personagens escolhida s…' |
+| Atividade 04 - Resposta status | GET /cadastro com exatamente 5 personagens retorna sucesso | ✅ | ✅ | Sem erros |
+| Atividade 04 - Resposta status | GET /cadastro com menos de 5 personagens retorna status 422 | ✅ | ❌ | AssertionError: expected 200 to be 422 // Object.is equality |
+| Atividade 04 - Resposta status | GET /cadastro sem personagens retorna status 422 | ✅ | ❌ | AssertionError: expected 500 to be 422 // Object.is equality |
+| Atividade 04 - Resposta status | GET /cadastro com mais de 5 personagens retorna status 422 | ✅ | ❌ | AssertionError: expected 200 to be 422 // Object.is equality |
