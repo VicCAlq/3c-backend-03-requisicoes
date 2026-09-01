@@ -27,36 +27,38 @@
   * Ao final deste arquivo, use "export default app" para
   * exportar o objeto do servidor para os testes automatizados.
   */
-
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
 const app = express();
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'src')));
 
-const _filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(_filename);
 
-app.get( (req, res) => {
-  res.sendFile(path.join(_dirname, "indexAtv.html"));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'indexAtv.html'));
 });
 
-app.get("/cadastro", (req, res) => {
+app.get('/cadastro', (req, res) => {
   res.send(`
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light dark"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
-  <title>Prazer em lhe conhecer</title>
-</head>
-<body>
-  <h1>Cadastro feito com sucesso!</h1>
-</body>
-</html>
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+    <title>Prazer em lhe conhecer</title>
+  </head>
+  <body>
+    <h1>Cadastro feito com sucesso!</h1>
+  </body>
+  </html>
   `);
 });
 
-export default app;
+
+
+app.listen(porta, () => {
+  console.log(`Servidor rodando em http://localhost:${porta}`)
+})
