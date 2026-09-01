@@ -37,27 +37,32 @@
   */
 
 
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
 const app = express();
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'src')));
 
-const _filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(__filename);
 
-
-app.get( (req, res) => {
-  res.sendFile(path.join(__dirname, "indexAtv.html"));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'indexAtv.html'));
 });
 
-
-app.get("/cadastro", (req, res) => {
+app.get('/cadastro', (req, res) => {
   const { nome, email, controle } = req.query;
-  let personagem = req.query.personagem || [];
-  if (!Array.isArray(personagem)) {
+
+  let { personagem } = req.query;
+
+  // garante que personagem seja sempre um array
+if (!Array.isArray(personagem)) {
+  if (personagem) {
     personagem = [personagem];
+  } else {
+    personagem = [];
   }
+}
+
   res.send(`
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -70,12 +75,11 @@ app.get("/cadastro", (req, res) => {
 </head>
 <body>
   <h1>Cadastro feito com sucesso!</h1>
-
   <p><strong>Participante:</strong> ${nome}</p>
   <p><strong>Email:</strong> ${email}</p>
   <p><strong>Tipo de controle:</strong> ${controle}</p>
-
   <p><strong>Personagens escolhidos:</strong></p>
+
   <p>${personagem[0]}</p>
   <p>${personagem[1]}</p>
   <p>${personagem[2]}</p>
@@ -86,4 +90,6 @@ app.get("/cadastro", (req, res) => {
   `);
 });
 
-export default app;
+
+
+export default app
